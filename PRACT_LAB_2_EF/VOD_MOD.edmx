@@ -1,0 +1,194 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище VodocanalModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Employeers">
+          <Key>
+            <PropertyRef Name="employeer_id" />
+          </Key>
+          <Property Name="employeer_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="employeer_name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="employeer_surname" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="employeer_middlename" Type="varchar" MaxLength="30" />
+          <Property Name="id_post" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Posts">
+          <Key>
+            <PropertyRef Name="post_id" />
+          </Key>
+          <Property Name="post_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="post_name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="post_salary" Type="real" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "Vodocanal.dbo.Empl4" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="Empl4">
+          <Key>
+            <PropertyRef Name="employeer_id" />
+            <PropertyRef Name="employeer_name" />
+            <PropertyRef Name="employeer_surname" />
+            <PropertyRef Name="post_name" />
+            <PropertyRef Name="post_salary" />
+          </Key>
+          <Property Name="employeer_id" Type="int" Nullable="false" />
+          <Property Name="employeer_name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="employeer_surname" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="employeer_middlename" Type="varchar" MaxLength="30" />
+          <Property Name="post_name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="post_salary" Type="real" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Employeer__id_po__534D60F1">
+          <End Role="Posts" Type="Self.Posts" Multiplicity="1" />
+          <End Role="Employeers" Type="Self.Employeers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Posts">
+              <PropertyRef Name="post_id" />
+            </Principal>
+            <Dependent Role="Employeers">
+              <PropertyRef Name="id_post" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище VodocanalModelContainer">
+          <EntitySet Name="Employeers" EntityType="Self.Employeers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Posts" EntityType="Self.Posts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Empl4" EntityType="Self.Empl4" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Empl4].[employeer_id] AS [employeer_id], 
+    [Empl4].[employeer_name] AS [employeer_name], 
+    [Empl4].[employeer_surname] AS [employeer_surname], 
+    [Empl4].[employeer_middlename] AS [employeer_middlename], 
+    [Empl4].[post_name] AS [post_name], 
+    [Empl4].[post_salary] AS [post_salary]
+    FROM [dbo].[Empl4] AS [Empl4]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__Employeer__id_po__534D60F1" Association="Self.FK__Employeer__id_po__534D60F1">
+            <End Role="Posts" EntitySet="Posts" />
+            <End Role="Employeers" EntitySet="Employeers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="VodocanalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Employeers">
+          <Key>
+            <PropertyRef Name="employeer_id" />
+          </Key>
+          <Property Name="employeer_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="employeer_name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="employeer_surname" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="employeer_middlename" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="id_post" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Posts" Relationship="Self.FK__Employeer__id_po__534D60F1" FromRole="Employeers" ToRole="Posts" />
+        </EntityType>
+        <EntityType Name="Posts">
+          <Key>
+            <PropertyRef Name="post_id" />
+          </Key>
+          <Property Name="post_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="post_name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="post_salary" Type="Single" Nullable="false" />
+          <NavigationProperty Name="Employeers" Relationship="Self.FK__Employeer__id_po__534D60F1" FromRole="Posts" ToRole="Employeers" />
+        </EntityType>
+        <Association Name="FK__Employeer__id_po__534D60F1">
+          <End Role="Posts" Type="Self.Posts" Multiplicity="1" />
+          <End Role="Employeers" Type="Self.Employeers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Posts">
+              <PropertyRef Name="post_id" />
+            </Principal>
+            <Dependent Role="Employeers">
+              <PropertyRef Name="id_post" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="VodocanalEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Employeers" EntityType="Self.Employeers" />
+          <EntitySet Name="Posts" EntityType="Self.Posts" />
+          <AssociationSet Name="FK__Employeer__id_po__534D60F1" Association="Self.FK__Employeer__id_po__534D60F1">
+            <End Role="Posts" EntitySet="Posts" />
+            <End Role="Employeers" EntitySet="Employeers" />
+          </AssociationSet>
+          <EntitySet Name="Empl4" EntityType="VodocanalModel.Empl4" />
+        </EntityContainer>
+        <EntityType Name="Empl4">
+          <Key>
+            <PropertyRef Name="employeer_id" />
+            <PropertyRef Name="employeer_name" />
+            <PropertyRef Name="employeer_surname" />
+            <PropertyRef Name="post_name" />
+            <PropertyRef Name="post_salary" />
+          </Key>
+          <Property Name="employeer_id" Type="Int32" Nullable="false" />
+          <Property Name="employeer_name" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="employeer_surname" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="employeer_middlename" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="post_name" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="post_salary" Type="Single" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище VodocanalModelContainer" CdmEntityContainer="VodocanalEntities1">
+          <EntitySetMapping Name="Employeers">
+            <EntityTypeMapping TypeName="VodocanalModel.Employeers">
+              <MappingFragment StoreEntitySet="Employeers">
+                <ScalarProperty Name="employeer_id" ColumnName="employeer_id" />
+                <ScalarProperty Name="employeer_name" ColumnName="employeer_name" />
+                <ScalarProperty Name="employeer_surname" ColumnName="employeer_surname" />
+                <ScalarProperty Name="employeer_middlename" ColumnName="employeer_middlename" />
+                <ScalarProperty Name="id_post" ColumnName="id_post" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Posts">
+            <EntityTypeMapping TypeName="VodocanalModel.Posts">
+              <MappingFragment StoreEntitySet="Posts">
+                <ScalarProperty Name="post_id" ColumnName="post_id" />
+                <ScalarProperty Name="post_name" ColumnName="post_name" />
+                <ScalarProperty Name="post_salary" ColumnName="post_salary" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Empl4">
+            <EntityTypeMapping TypeName="VodocanalModel.Empl4">
+              <MappingFragment StoreEntitySet="Empl4">
+                <ScalarProperty Name="post_salary" ColumnName="post_salary" />
+                <ScalarProperty Name="post_name" ColumnName="post_name" />
+                <ScalarProperty Name="employeer_middlename" ColumnName="employeer_middlename" />
+                <ScalarProperty Name="employeer_surname" ColumnName="employeer_surname" />
+                <ScalarProperty Name="employeer_name" ColumnName="employeer_name" />
+                <ScalarProperty Name="employeer_id" ColumnName="employeer_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище VodocanalModelContainer" CdmEntityContainer="VodocanalEntities1">
+    <EntitySetMapping Name="Employeers">
+      <EntityTypeMapping TypeName="VodocanalModel.Employeers">
+        <MappingFragment StoreEntitySet="Employeers">
+          <ScalarProperty Name="employeer_id" ColumnName="employeer_id" />
+          <ScalarProperty Name="employeer_name" ColumnName="employeer_name" />
+          <ScalarProperty Name="employeer_surname" ColumnName="employeer_surname" />
+          <ScalarProperty Name="employeer_middlename" ColumnName="employeer_middlename" />
+          <ScalarProperty Name="id_post" ColumnName="id_post" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Posts">
+      <EntityTypeMapping TypeName="VodocanalModel.Posts">
+        <MappingFragment StoreEntitySet="Posts">
+          <ScalarProperty Name="post_id" ColumnName="post_id" />
+          <ScalarProperty Name="post_name" ColumnName="post_name" />
+          <ScalarProperty Name="post_salary" ColumnName="post_salary" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Empl4">
+      <EntityTypeMapping TypeName="VodocanalModel.Empl4">
+        <MappingFragment StoreEntitySet="Empl4">
+          <ScalarProperty Name="post_salary" ColumnName="post_salary" />
+          <ScalarProperty Name="post_name" ColumnName="post_name" />
+          <ScalarProperty Name="employeer_middlename" ColumnName="employeer_middlename" />
+          <ScalarProperty Name="employeer_surname" ColumnName="employeer_surname" />
+          <ScalarProperty Name="employeer_name" ColumnName="employeer_name" />
+          <ScalarProperty Name="employeer_id" ColumnName="employeer_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
